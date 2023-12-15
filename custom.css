@@ -14,9 +14,17 @@ main{
 
 }
 .row{
+    display:flex;
+    align-items:center;
+    justify-content:center;
     height:100px;
     margin:10px;
     border-color:none;
+    font-size:50px;
+    color:white;
+}
+h4{
+    font-size:30px;
 }
 #search{
     height:50px;

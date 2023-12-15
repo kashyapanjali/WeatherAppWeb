@@ -2,21 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>project_2</title>
     <link rel="stylesheet" href="custom.css">
 </head>
-<body>
-    <main>
-        <div class="row" style="text-align:center;"><input type="search" id="search" placeholder="Search by city name">
+   <body>
+      <main>
+        <div class="row" style="text-align:center;">
+            <form action="">
+            <input type="search" id="search" placeholder="Search by city name">
+        </form>
         </div>
-        <div class="row">
-            <div img src="/weather.png" alt="weather image"></div>
+        <div class="row" id="weather">
             <div>
-                <h3>32°C </h3>
+                <img src="/weather.png"height="100" alt="weather image">
+            </div>
+            <div><h3>32°C </h3>
+                <h4>Clear</h4>
             </div>
         </div>
     </main>
     <script src ="app.js"></script>
 </body>
+
 </html>
