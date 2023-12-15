@@ -1,4 +1,4 @@
-const API_KEY = `3265874a2c77ae4a04bb96236a642d2f`
+const API_KEY = `63ea7696193a8b454b2775d132cb2a50`
 
 const form = document.querySelector("form")
 
