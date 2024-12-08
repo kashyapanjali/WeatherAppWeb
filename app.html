@@ -1,32 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>project_2</title>
-    <link rel="stylesheet" href="custom.css">
-</head>
-
-   <body>
-      <main>
-        <div class="row" style="text-align:center;">
-            <form action="">
-            <input type="search" id="search" placeholder="Search by city name">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App</title>
+    <link rel="stylesheet" href="custom.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <h2>Feedback</h2>
+        <form id="feedbackForm">
+          <textarea
+            id="feedback"
+            placeholder="Share your thoughts..."
+            rows="5"
+          ></textarea>
+          <button type="submit">Submit</button>
         </form>
+        <div class="feedback-display">
+          <h3>Feedback Received:</h3>
+          <div id="feedbackList" class="feedback-list"></div>
         </div>
-        <div class="row" id="weather">
-            <div>
-                <img src="/weather.png"height="100" alt="weather image">
-            </div>
-            <div><h3>32°C </h3>
-                <h4>Clear</h4>
-            </div>
-        </div>
-    </main>
-    
-    <script src ="app.js"></script>
-</body>
+      </aside>
 
+      <!-- Content -->
+      <main class="content">
+        <div class="search-container">
+          <form id="weatherForm">
+            <input
+              type="search"
+              id="search"
+              placeholder="Search by city name"
+            />
+          </form>
+        </div>
+        <div class="weather" id="weather">
+          <div class="weather-icon">
+            <img src="/weather.png" alt="Weather Icon" />
+          </div>
+          <div class="weather-info">
+            <h3>32°C</h3>
+            <h4>Clear</h4>
+            <p>Humidity: 50%</p>
+            <p>Wind Speed: 5 m/s</p>
+          </div>
+        </div>
+      </main>
+    </div>
+    <script src="app.js"></script>
+  </body>
 </html>
