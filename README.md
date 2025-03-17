@@ -79,18 +79,19 @@ const config = {
 
 ## �� Project Structure
 
-weather-app/
-│
-├── index.html
-├── login.html
-├── app.js
-├── config.js
-├── custom.css
-│
-├── assets/
-│ └── weather.png
-│
-└── README.md
+```
+        weather-app/
+        │
+        ├── index.html
+        ├── login.html
+        ├── app.js
+        ├── config.js
+        ├── custom.css
+        │
+        ├── assets/
+        │ └── weather.png
+        │
+        └── README.md
 ```
 
 ## 🌟 Features in Detail
@@ -130,7 +131,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Google Gemini API for recommendations
 - All contributors and users of the app
 
+
 ## 📧 Contact
 Your Name - Anjali Kashyap (mailto:anjalikashyap9608@gmail.com)
-
-Project Link: [https://github.com/yourusername/weather-app](https://github.com/yourusername/weather-app)
