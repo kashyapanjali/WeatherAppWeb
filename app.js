@@ -15,6 +15,9 @@ const recommendationsCache = new Map();
 
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
+// Add this after your existing constants
+const database = firebase.database();
+
 // Check authentication
 window.onload = function() {
     const userProfile = localStorage.getItem('userProfile');
@@ -296,8 +299,8 @@ form.addEventListener("submit", (e) => {
   if (city) getWeather(city);
 });
 
-// Update your feedback submission to include user info
-feedbackForm.addEventListener("submit", (e) => {
+// Update the feedback submission handler
+feedbackForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     const feedback = document.getElementById("feedback").value.trim();
     const userProfile = JSON.parse(localStorage.getItem('userProfile'));
@@ -307,36 +310,91 @@ feedbackForm.addEventListener("submit", (e) => {
             text: feedback,
             user: {
                 name: userProfile.name,
-                picture: userProfile.picture
+                picture: userProfile.picture,
+                email: userProfile.email,
+                id: userProfile.id
             },
             timestamp: new Date().toISOString()
         };
         
-        feedbackArray.push(feedbackItem);
-        document.getElementById("feedback").value = "";
-        displayFeedback();
+        try {
+            // Save to Firebase
+            await database.ref('feedback').push(feedbackItem);
+            document.getElementById("feedback").value = "";
+        } catch (error) {
+            console.error("Error saving feedback:", error);
+            alert("Error saving feedback. Please try again.");
+        }
     } else {
         alert("Please enter your feedback before submitting.");
     }
 });
 
-// Update the display feedback function to show user info
-const displayFeedback = () => {
+// Add real-time feedback listener
+function initializeFeedbackListener() {
+    const feedbackRef = database.ref('feedback');
+    feedbackRef.on('value', (snapshot) => {
+        const feedbackData = snapshot.val();
+        displayFeedback(feedbackData);
+    });
+}
+
+// Update the display feedback function
+const displayFeedback = (feedbackData) => {
     feedbackList.innerHTML = "";
     
-    feedbackArray.forEach((item, index) => {
-        const feedbackItem = document.createElement("div");
-        feedbackItem.className = "feedback-item";
-        feedbackItem.innerHTML = `
-            <div class="feedback-header">
-                <img src="${item.user.picture}" alt="${item.user.name}" class="user-avatar">
-                <span class="user-name">${item.user.name}</span>
-                <span class="timestamp">${new Date(item.timestamp).toLocaleString()}</span>
-            </div>
-            <div class="feedback-text">${item.text}</div>
-        `;
-        feedbackList.appendChild(feedbackItem);
-    });
+    if (feedbackData) {
+        const currentUser = JSON.parse(localStorage.getItem('userProfile'));
+        
+        // Convert to array and sort by timestamp
+        const feedbackArray = Object.entries(feedbackData)
+            .map(([key, value]) => ({
+                id: key,
+                ...value
+            }))
+            .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+        feedbackArray.forEach((item) => {
+            const feedbackItem = document.createElement("div");
+            feedbackItem.className = "feedback-item";
+            feedbackItem.innerHTML = `
+                <div class="feedback-header">
+                    <img src="${item.user.picture}" alt="${item.user.name}" class="user-avatar">
+                    <span class="user-name">${item.user.name}</span>
+                    <span class="timestamp">${new Date(item.timestamp).toLocaleString()}</span>
+                    ${item.user.id === currentUser.id ? 
+                        `<button onclick="deleteFeedback('${item.id}')" class="delete-btn">Delete</button>` : 
+                        ''}
+                </div>
+                <div class="feedback-text">${item.text}</div>
+            `;
+            feedbackList.appendChild(feedbackItem);
+        });
+    }
     
     feedbackList.scrollTop = feedbackList.scrollHeight;
+};
+
+// Add delete functionality
+async function deleteFeedback(feedbackId) {
+    try {
+        await database.ref(`feedback/${feedbackId}`).remove();
+        // UI will update automatically through the listener
+    } catch (error) {
+        console.error("Error deleting feedback:", error);
+        alert("Error deleting feedback. Please try again.");
+    }
+}
+
+// Make deleteFeedback available globally
+window.deleteFeedback = deleteFeedback;
+
+// Update your existing window.onload
+const existingOnload = window.onload;
+window.onload = function() {
+    // Call existing onload for Google Auth
+    existingOnload?.();
+    
+    // Initialize feedback listener
+    initializeFeedbackListener();
 };

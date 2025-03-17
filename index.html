@@ -57,6 +57,26 @@
         </div>
       </main>
     </div>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+
+    <!-- Firebase Config -->
+    <script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyAsD_5q9EfBh1ke7nS4ceuRR1w90uFPwe0",
+        authDomain: "weather-app-d8eeb.firebaseapp.com",
+        databaseURL: "https://weather-app-d8eeb-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "weather-app-d8eeb",
+        storageBucket: "weather-app-d8eeb.firebasestorage.app",
+        messagingSenderId: "899877398474",
+        appId: "1:899877398474:web:a46e671572bcc3be001133",
+        measurementId: "G-12MV40EKWP"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    </script>
+
     <script src="config.js"></script>
     <script src="app.js"></script>
   </body>
