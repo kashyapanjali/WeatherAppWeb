@@ -1,0 +1,4 @@
+const config = {
+  WEATHER_API_KEY: '63ea7696193a8b454b2775d132cb2a50',
+  GEMINI_API_KEY: 'AIzaSyDOal6vThooDPnjXkvSnENNoh_GUERCEiQ'
+}; 
