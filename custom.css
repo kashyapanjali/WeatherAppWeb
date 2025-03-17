@@ -400,3 +400,128 @@ body {
 #signOutBtn:hover {
     background-color: #c0392b;
 }
+
+/* Add these media queries at the end of your CSS file */
+
+/* For tablets and smaller screens */
+@media screen and (max-width: 1024px) {
+  .container {
+    width: 95%;
+    padding: 30px;
+  }
+
+  .recommendations-container {
+    max-width: 100%;
+  }
+}
+
+/* For mobile devices */
+@media screen and (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    padding: 15px;
+    width: 100%;
+  }
+
+  .sidebar {
+    width: 100%;
+    margin-bottom: 20px;
+    border-radius: 10px;
+  }
+
+  .content {
+    width: 100%;
+    border-radius: 10px;
+  }
+
+  .current-weather {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .weather-info {
+    margin-left: 0;
+    margin-top: 15px;
+  }
+
+  .weather-icon img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .temperature {
+    font-size: 2em;
+  }
+
+  .recommendation-section {
+    padding: 10px;
+  }
+
+  .feedback-header {
+    flex-wrap: wrap;
+  }
+
+  .timestamp {
+    width: 100%;
+    margin: 5px 0;
+    text-align: left;
+  }
+
+  .search-container {
+    padding: 0 10px;
+  }
+
+  #search {
+    font-size: 16px; /* Better for mobile input */
+  }
+}
+
+/* For very small devices */
+@media screen and (max-width: 480px) {
+  .container {
+    padding: 10px;
+  }
+
+  .weather-display {
+    margin: 10px auto;
+  }
+
+  .recommendation-section h2 {
+    font-size: 1.2em;
+  }
+
+  .recommendation-section h3 {
+    font-size: 1em;
+  }
+
+  .feedback-item {
+    padding: 10px;
+  }
+
+  .user-profile {
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .user-profile img {
+    margin-bottom: 5px;
+  }
+
+  .user-profile span {
+    width: 100%;
+    text-align: center;
+  }
+
+  #signOutBtn {
+    width: auto;
+    margin-top: 5px;
+  }
+}
+
+/* Fix for iOS Safari 100vh issue */
+@supports (-webkit-touch-callout: none) {
+  body {
+    min-height: -webkit-fill-available;
+  }
+}
