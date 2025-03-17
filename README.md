@@ -78,3 +78,59 @@ const config = {
      ```
 
 ## �� Project Structure
+
+weather-app/
+│
+├── index.html
+├── login.html
+├── app.js
+├── config.js
+├── custom.css
+│
+├── assets/
+│ └── weather.png
+│
+└── README.md
+```
+
+## 🌟 Features in Detail
+
+### Weather Information
+- Current temperature
+- Weather conditions
+- Humidity levels
+- Wind speed
+- Weather icons
+
+### Authentication
+- Google Sign-In integration
+- User profile display
+- Secure authentication flow
+
+### Feedback System
+- Real-time feedback submission
+- Firebase database integration
+- User-specific feedback management
+- Delete functionality for own feedback
+
+## 🤝 Contributing
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📝 License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+- OpenWeather API for weather data
+- Google Cloud Platform for authentication
+- Firebase for database services
+- Google Gemini API for recommendations
+- All contributors and users of the app
+
+## 📧 Contact
+Your Name - Anjali Kashyap (mailto:anjalikashyap9608@gmail.com)
+
+Project Link: [https://github.com/yourusername/weather-app](https://github.com/yourusername/weather-app)
