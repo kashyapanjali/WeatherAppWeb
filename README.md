@@ -1,23 +1,19 @@
-# Weather App with Google Authentication
+# Weather App 🌤️
 
-A real-time weather application with Google Authentication and feedback system using Firebase Database.
+A modern weather application that provides real-time weather information, personalized recommendations, and user feedback system. Built with HTML, CSS, and JavaScript, integrating Google Authentication and Firebase.
 
-## Features
+## 🌐 Live Demo
+[Weather App Demo](https://anjali-weather-app.netlify.app)
 
-- 🌤️ Real-time weather information
-- 🔐 Google Authentication
-- 💭 User feedback system with Firebase
-- 🎯 Personalized weather recommendations
-- 👤 User profile management
-- 🔄 Real-time feedback updates
-- 🗑️ User-specific feedback deletion
+## ✨ Features
+- Real-time weather information
+- Google Authentication for user management
+- User feedback system with Firebase
+- Personalized weather recommendations
+- Responsive design for all devices
+- Dynamic weather icons and information display
 
-## Live Demo
-
-Visit the live application: [Weather App](https://anjali-weather-app.netlify.app/)
-
-## Technologies Used
-
+## 🛠️ Technologies Used
 - HTML5
 - CSS3
 - JavaScript
@@ -26,57 +22,59 @@ Visit the live application: [Weather App](https://anjali-weather-app.netlify.app
 - OpenWeather API
 - Google Gemini API
 
-## Setup Instructions
+## 🔑 API Keys Required
+Create a `config.js` file in your root directory with the following:
 
-1. **Clone the Repository**
+```javascript
+const config = {
+  // Weather and Gemini APIs
+  WEATHER_API_KEY: 'your_openweather_api_key',
+  GEMINI_API_KEY: 'your_gemini_api_key',
+  
+  // Google Auth
+  GOOGLE_CLIENT_ID: 'your_google_client_id',
+  
+  // Firebase Config
+  firebase: {
+    apiKey: "your_firebase_api_key",
+    authDomain: "your_project.firebaseapp.com",
+    databaseURL: "your_database_url",
+    projectId: "your_project_id",
+    storageBucket: "your_storage_bucket",
+    messagingSenderId: "your_sender_id",
+    appId: "your_app_id",
+    measurementId: "your_measurement_id"
+  }
+};
+```
+
+## 🚀 Setup Instructions
+1. Clone the repository:
    ```bash
    git clone https://github.com/yourusername/weather-app.git
-   cd weather-app
    ```
 
-2. **Configure API Keys**
-   - Update the `config.js` file with your API keys:
-   ```javascript
-   const config = {
-     WEATHER_API_KEY: 'your_weather_api_key',
-     GEMINI_API_KEY: 'your_gemini_api_key',
-     GOOGLE_CLIENT_ID: 'your_google_client_id',
-     firebase: {
-       // Your Firebase config object
-     }
-   };
-   ```
+2. Configure API Keys:
+   - Create a `config.js` file in the root directory
+   - Add your API keys and configuration as shown above
 
-3. **Set Up Firebase**
-   - Create a project in Firebase Console
+3. Set up Firebase:
+   - Create a new Firebase project
    - Enable Realtime Database
-   - Set up Google Authentication
-   - Add your domain to authorized origins
+   - Set up Authentication with Google sign-in
+   - Copy your Firebase configuration to `config.js`
 
-4. **Run the Application**
-   - Open `index.html` in a web browser
+4. Set up Google OAuth:
+   - Create a project in Google Cloud Console
+   - Configure the OAuth consent screen
+   - Create OAuth 2.0 credentials
+   - Add authorized domains and origins
+
+5. Run the application:
+   - Open `index.html` in your browser
    - Or use a local server:
      ```bash
      python -m http.server 3000
      ```
-   - Visit `http://localhost:3000`
 
-## Features in Detail
-
-### Weather Information
-- Search for any city
-- View current temperature, humidity, and wind speed
-- Get weather-specific recommendations
-
-### Authentication
-- Sign in with Google
-- Secure user sessions
-- Profile picture and name display
-
-### Feedback System
-- Submit feedback with user information
-- Real-time feedback updates
-- Delete your own feedback
-- Persistent storage with Firebase
-
-## Project Structure
+## �� Project Structure
