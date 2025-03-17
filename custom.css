@@ -313,3 +313,74 @@ body {
   padding: 20px;
   color: #666;
 }
+
+/* Add these styles */
+.user-profile {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-profile img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.user-profile span {
+    color: white;
+    flex-grow: 1;
+    font-weight: bold;
+}
+
+.feedback-item {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.feedback-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 5px;
+}
+
+.feedback-header img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.feedback-header .user-name {
+    color: white;
+    font-weight: bold;
+}
+
+.feedback-header .timestamp {
+    color: #ccc;
+    font-size: 0.8em;
+    margin-left: auto;
+}
+
+.feedback-text {
+    color: white;
+}
+
+#signOutBtn {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#signOutBtn:hover {
+    background-color: #c0392b;
+}

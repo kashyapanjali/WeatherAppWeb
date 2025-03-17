@@ -5,11 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather App</title>
     <link rel="stylesheet" href="custom.css" />
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
   </head>
   <body>
     <div class="container">
       <!-- Sidebar -->
       <aside class="sidebar">
+        <!-- Add User Profile Section -->
+        <div class="user-profile">
+          <img id="userAvatar" src="" alt="User Avatar">
+          <span id="userName"></span>
+          <button id="signOutBtn" onclick="handleSignOut()">Sign Out</button>
+        </div>
+
         <h2>Feedback</h2>
         <form id="feedbackForm">
           <textarea

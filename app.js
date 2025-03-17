@@ -15,6 +15,26 @@ const recommendationsCache = new Map();
 
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
+// Check authentication
+window.onload = function() {
+    const userProfile = localStorage.getItem('userProfile');
+    if (!userProfile) {
+        window.location.href = 'login.html';
+        return;
+    }
+    
+    // Set user profile information
+    const user = JSON.parse(userProfile);
+    document.getElementById('userAvatar').src = user.picture;
+    document.getElementById('userName').textContent = user.name;
+}
+
+// Add this function for sign out
+function handleSignOut() {
+    localStorage.removeItem('userProfile');
+    window.location.href = 'login.html';
+}
+
 // Fetch Weather
 const getWeather = async (city) => {
   weather.innerHTML = `<h2>Loading...</h2>`;
@@ -276,31 +296,47 @@ form.addEventListener("submit", (e) => {
   if (city) getWeather(city);
 });
 
-// Handle Feedback Submission
+// Update your feedback submission to include user info
 feedbackForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-  const feedback = document.getElementById("feedback").value.trim();
-  if (feedback) {
-    feedbackArray.push(feedback);
-    document.getElementById("feedback").value = "";
-    displayFeedback();
-  } else {
-    alert("Please enter your feedback before submitting.");
-  }
+    e.preventDefault();
+    const feedback = document.getElementById("feedback").value.trim();
+    const userProfile = JSON.parse(localStorage.getItem('userProfile'));
+    
+    if (feedback) {
+        const feedbackItem = {
+            text: feedback,
+            user: {
+                name: userProfile.name,
+                picture: userProfile.picture
+            },
+            timestamp: new Date().toISOString()
+        };
+        
+        feedbackArray.push(feedbackItem);
+        document.getElementById("feedback").value = "";
+        displayFeedback();
+    } else {
+        alert("Please enter your feedback before submitting.");
+    }
 });
 
-// Display Feedback with Scrollable List
+// Update the display feedback function to show user info
 const displayFeedback = () => {
-  // Clear existing feedback items
-  feedbackList.innerHTML = "";
-
-  // Add feedback items to the list
-  feedbackArray.forEach((item, index) => {
-    const feedbackItem = document.createElement("p");
-    feedbackItem.textContent = `${index + 1}. ${item}`;
-    feedbackList.appendChild(feedbackItem);
-  });
-
-  // Ensure the latest feedback is visible
-  feedbackList.scrollTop = feedbackList.scrollHeight;
+    feedbackList.innerHTML = "";
+    
+    feedbackArray.forEach((item, index) => {
+        const feedbackItem = document.createElement("div");
+        feedbackItem.className = "feedback-item";
+        feedbackItem.innerHTML = `
+            <div class="feedback-header">
+                <img src="${item.user.picture}" alt="${item.user.name}" class="user-avatar">
+                <span class="user-name">${item.user.name}</span>
+                <span class="timestamp">${new Date(item.timestamp).toLocaleString()}</span>
+            </div>
+            <div class="feedback-text">${item.text}</div>
+        `;
+        feedbackList.appendChild(feedbackItem);
+    });
+    
+    feedbackList.scrollTop = feedbackList.scrollHeight;
 };
