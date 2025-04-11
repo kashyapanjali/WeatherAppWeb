@@ -1,72 +1,94 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Weather App</title>
-    <link rel="stylesheet" href="custom.css" />
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
-  </head>
-  <body>
-    <div class="container">
-      <!-- Sidebar -->
-      <aside class="sidebar">
-        <!-- Add User Profile Section -->
-        <div class="user-profile">
-          <img id="userAvatar" src="" alt="User Avatar">
-          <span id="userName"></span>
-          <button id="signOutBtn" onclick="handleSignOut()">Sign Out</button>
-        </div>
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>Weather App</title>
+		<link
+			rel="icon"
+			type="image/x-icon"
+			href="favicon.ico" />
+		<link
+			rel="stylesheet"
+			href="custom.css" />
+		<script
+			src="https://accounts.google.com/gsi/client"
+			async
+			defer></script>
+	</head>
+	<body>
+		<div class="container">
+			<!-- Sidebar -->
+			<aside class="sidebar">
+				<!-- Add User Profile Section -->
+				<div class="user-profile">
+					<img
+						id="userAvatar"
+						src=""
+						alt="User Avatar" />
+					<span id="userName"></span>
+					<button
+						id="signOutBtn"
+						onclick="handleSignOut()">
+						Sign Out
+					</button>
+				</div>
 
-        <h2>Feedback</h2>
-        <form id="feedbackForm">
-          <textarea
-            id="feedback"
-            placeholder="Share your thoughts..."
-            rows="5"
-          ></textarea>
-          <button type="submit">Submit</button>
-        </form>
-        <div class="feedback-display">
-          <h3>Feedback Received:</h3>
-          <div id="feedbackList" class="feedback-list"></div>
-        </div>
-      </aside>
+				<h2>Feedback</h2>
+				<form id="feedbackForm">
+					<textarea
+						id="feedback"
+						placeholder="Share your thoughts..."
+						rows="5"></textarea>
+					<button type="submit">Submit</button>
+				</form>
+				<div class="feedback-display">
+					<h3>Feedback Received:</h3>
+					<div
+						id="feedbackList"
+						class="feedback-list"></div>
+				</div>
+			</aside>
 
-      <!-- Content -->
-      <main class="content">
-        <div class="search-container">
-          <form id="weatherForm">
-            <input
-              type="search"
-              id="search"
-              placeholder="Search by city name"
-            />
-          </form>
-        </div>
-        <div class="weather" id="weather">
-          <div class="weather-icon">
-            <img src="/weather.png" alt="Weather Icon" />
-          </div>
-          <div class="weather-info">
-            <h3>32°C</h3>
-            <h4>Clear</h4>
-            <p>Humidity: 50%</p>
-            <p>Wind Speed: 5 m/s</p>
-          </div>
-        </div>
-      </main>
-    </div>
-    <script src="config.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+			<!-- Content -->
+			<main class="content">
+				<div class="search-container">
+					<form id="weatherForm">
+						<input
+							type="search"
+							id="search"
+							placeholder="Search by city name" />
+					</form>
+				</div>
+				<div
+					class="weather"
+					id="weather">
+					<div class="weather-icon">
+						<img
+							src="/weather.png"
+							alt="Weather Icon" />
+					</div>
+					<div class="weather-info">
+						<h3>32°C</h3>
+						<h4>Clear</h4>
+						<p>Humidity: 50%</p>
+						<p>Wind Speed: 5 m/s</p>
+					</div>
+				</div>
+			</main>
+		</div>
+		<script src="config.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
 
-    <!-- Firebase Config -->
-    <script>
-    // Initialize Firebase using config from config.js
-    firebase.initializeApp(config.firebase);
-    </script>
+		<!-- Firebase Config -->
+		<script>
+			// Initialize Firebase using config from config.js
+			firebase.initializeApp(config.firebase);
+		</script>
 
-    <script src="app.js"></script>
-  </body>
+		<script src="app.js"></script>
+	</body>
 </html>
