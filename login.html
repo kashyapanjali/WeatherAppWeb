@@ -6,8 +6,6 @@
     <title>Weather App Login</title>
     <script src="config.js"></script>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
     <style>
         .login-container {
             display: flex;
@@ -51,29 +49,21 @@
     </div>
     <script>
         function handleCredentialResponse(response) {
-            // Decode the credential response (for your UI)
+            // Decode the credential response
             const responsePayload = decodeJwtResponse(response.credential);
-    
-            // Store user info in localStorage (for your UI)
+            
+            // Store user info in localStorage
             localStorage.setItem('userProfile', JSON.stringify({
                 id: responsePayload.sub,
                 name: responsePayload.name,
                 email: responsePayload.email,
                 picture: responsePayload.picture
             }));
-    
-            // --- NEW: Sign in with Firebase Auth using Google ID token ---
-            const credential = firebase.auth.GoogleAuthProvider.credential(response.credential);
-            firebase.auth().signInWithCredential(credential)
-                .then(() => {
-                    // Redirect to the main app
-                    window.location.href = 'index.html';
-                })
-                .catch((error) => {
-                    alert("Firebase Auth failed: " + error.message);
-                });
+            
+            // Redirect to the main app
+            window.location.href = 'index.html';
         }
-    
+
         function decodeJwtResponse(token) {
             const base64Url = token.split('.')[1];
             const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -82,7 +72,7 @@
             }).join(''));
             return JSON.parse(jsonPayload);
         }
-    
+
         // Check if user is already logged in
         window.onload = function() {
             const userProfile = localStorage.getItem('userProfile');
@@ -97,17 +87,6 @@
     
         // Initialize Firebase using config from config.js
         firebase.initializeApp(config.firebase);
-    
-        firebase.auth().onAuthStateChanged(function(user) {
-            if (user) {
-                // User is signed in, show the page
-                document.body.style.display = 'block';
-                // ... your existing code to set user info ...
-            } else {
-                // Not signed in, redirect to login
-                window.location.href = 'login.html';
-            }
-        });
     </script>
 </body>
 </html> 

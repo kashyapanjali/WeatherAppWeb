@@ -44,9 +44,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 // Add this function for sign out
 function handleSignOut() {
     localStorage.removeItem('userProfile');
-    firebase.auth().signOut().then(function() {
-        window.location.href = 'login.html';
-    });
+    window.location.href = 'login.html';
 }
 
 // Fetch Weather
@@ -399,3 +397,31 @@ async function deleteFeedback(feedbackId) {
 
 // Make deleteFeedback available globally
 window.deleteFeedback = deleteFeedback;
+
+// Update your existing window.onload
+const existingOnload = window.onload;
+window.onload = function() {
+    // Call existing onload for Google Auth
+    existingOnload?.();
+    
+    // Initialize feedback listener
+    initializeFeedbackListener();
+
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+            // User is signed in, set user profile info for UI
+            const userProfile = {
+                id: user.uid,
+                name: user.displayName,
+                email: user.email,
+                picture: user.photoURL
+            };
+            localStorage.setItem('userProfile', JSON.stringify(userProfile));
+            document.getElementById('userAvatar').src = userProfile.picture;
+            document.getElementById('userName').textContent = userProfile.name;
+        } else {
+            // Not signed in, redirect to login
+            window.location.href = 'login.html';
+        }
+    });
+};
