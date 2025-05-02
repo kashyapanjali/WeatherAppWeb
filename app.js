@@ -19,27 +19,18 @@ const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 const database = firebase.database();
 
 // Check authentication
-firebase.auth().onAuthStateChanged(function(user) {
-    if (user) {
-        // User is signed in, set user profile info for UI
-        const userProfile = {
-            id: user.uid,
-            name: user.displayName,
-            email: user.email,
-            picture: user.photoURL
-        };
-        localStorage.setItem('userProfile', JSON.stringify(userProfile));
-        document.getElementById('userAvatar').src = userProfile.picture;
-        document.getElementById('userName').textContent = userProfile.name;
-        // Show the page
-        document.body.style.display = 'block';
-        // Initialize feedback listener
-        initializeFeedbackListener();
-    } else {
-        // Not signed in, redirect to login
+window.onload = function() {
+    const userProfile = localStorage.getItem('userProfile');
+    if (!userProfile) {
         window.location.href = 'login.html';
+        return;
     }
-});
+    
+    // Set user profile information
+    const user = JSON.parse(userProfile);
+    document.getElementById('userAvatar').src = user.picture;
+    document.getElementById('userName').textContent = user.name;
+}
 
 // Add this function for sign out
 function handleSignOut() {
@@ -406,22 +397,4 @@ window.onload = function() {
     
     // Initialize feedback listener
     initializeFeedbackListener();
-
-    firebase.auth().onAuthStateChanged(function(user) {
-        if (user) {
-            // User is signed in, set user profile info for UI
-            const userProfile = {
-                id: user.uid,
-                name: user.displayName,
-                email: user.email,
-                picture: user.photoURL
-            };
-            localStorage.setItem('userProfile', JSON.stringify(userProfile));
-            document.getElementById('userAvatar').src = userProfile.picture;
-            document.getElementById('userName').textContent = userProfile.name;
-        } else {
-            // Not signed in, redirect to login
-            window.location.href = 'login.html';
-        }
-    });
 };

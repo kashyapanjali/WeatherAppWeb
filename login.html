@@ -27,7 +27,7 @@
         }
     </style>
 </head>
-<body style="display:none;">
+<body>
     <div class="login-container">
         <div class="login-box">
             <h1>Weather App</h1>
@@ -75,18 +75,10 @@
 
         // Check if user is already logged in
         window.onload = function() {
-            const userProfile = localStorage.getItem('userProfile');
-            if (!userProfile) {
-                window.location.href = 'login.html';
-                return;
+            if (localStorage.getItem('userProfile')) {
+                window.location.href = 'index.html';
             }
-            // User is authenticated, show the page
-            document.body.style.display = 'block';
-            // ... your existing code ...
         }
-    
-        // Initialize Firebase using config from config.js
-        firebase.initializeApp(config.firebase);
     </script>
 </body>
 </html> 
