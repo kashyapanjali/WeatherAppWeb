@@ -22,7 +22,7 @@
 			async
 			defer></script>
 	</head>
-	<body>
+	<body style="display:none;">
 		<div class="container">
 			<!-- Sidebar -->
 			<aside class="sidebar">
@@ -90,6 +90,26 @@
 		<script>
 			// Initialize Firebase using config from config.js
 			firebase.initializeApp(config.firebase);
+		</script>
+		<script>
+			firebase.auth().onAuthStateChanged(function(user) {
+				if (user) {
+					// User is signed in, set user profile info for UI
+					const userProfile = {
+						id: user.uid,
+						name: user.displayName,
+						email: user.email,
+						picture: user.photoURL
+					};
+					localStorage.setItem('userProfile', JSON.stringify(userProfile));
+					document.getElementById('userAvatar').src = userProfile.picture;
+					document.getElementById('userName').textContent = userProfile.name;
+					document.body.style.display = 'block';
+					initializeFeedbackListener();
+				} else {
+					window.location.href = 'login.html';
+				}
+			});
 		</script>
 		<script src="app.js"></script>
 	</body>
