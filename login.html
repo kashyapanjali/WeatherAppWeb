@@ -1,84 +1,97 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Weather App Login</title>
-    <script src="config.js"></script>
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <style>
-        .login-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-        }
-        .login-box {
-            background-color: #5490cd;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-        h1 {
-            color: #fff;
-            margin-bottom: 20px;
-        }
-    </style>
-</head>
-<body>
-    <div class="login-container">
-        <div class="login-box">
-            <h1>Weather App</h1>
-            <div id="g_id_onload"
-                 data-client_id="642421121831-opeouvto6tq7g8umf7i36s60lblfjf62.apps.googleusercontent.com"
-                 data-callback="handleCredentialResponse"
-                 data-auto_prompt="false"
-                 data-ux_mode="popup">
-            </div>
-            <div class="g_id_signin"
-                 data-type="standard"
-                 data-size="large"
-                 data-theme="outline"
-                 data-text="sign_in_with"
-                 data-shape="rectangular"
-                 data-logo_alignment="left">
-            </div>
-        </div>
-    </div>
-    <script>
-        function handleCredentialResponse(response) {
-            // Decode the credential response
-            const responsePayload = decodeJwtResponse(response.credential);
-            
-            // Store user info in localStorage
-            localStorage.setItem('userProfile', JSON.stringify({
-                id: responsePayload.sub,
-                name: responsePayload.name,
-                email: responsePayload.email,
-                picture: responsePayload.picture
-            }));
-            
-            // Redirect to the main app
-            window.location.href = 'index.html';
-        }
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>Weather App Login</title>
+		<script src="config.js"></script>
+		<script
+			src="https://accounts.google.com/gsi/client"
+			async
+			defer></script>
+		<style>
+			.login-container {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				height: 100vh;
+			}
+			.login-box {
+				background-color: #5490cd;
+				padding: 30px;
+				border-radius: 10px;
+				box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+				text-align: center;
+			}
+			h1 {
+				color: #d9d948;
+				margin-bottom: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="login-container">
+			<div class="login-box">
+				<h1>AI-WeatherApp</h1>
+				<div
+					id="g_id_onload"
+					data-client_id="642421121831-opeouvto6tq7g8umf7i36s60lblfjf62.apps.googleusercontent.com"
+					data-callback="handleCredentialResponse"
+					data-auto_prompt="false"
+					data-ux_mode="popup"></div>
+				<div
+					class="g_id_signin"
+					data-type="standard"
+					data-size="large"
+					data-theme="outline"
+					data-text="sign_in_with"
+					data-shape="rectangular"
+					data-logo_alignment="left"></div>
+			</div>
+		</div>
+		<script>
+			function handleCredentialResponse(response) {
+				// Decode the credential response
+				const responsePayload = decodeJwtResponse(response.credential);
 
-        function decodeJwtResponse(token) {
-            const base64Url = token.split('.')[1];
-            const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-            const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-            }).join(''));
-            return JSON.parse(jsonPayload);
-        }
+				// Store user info in localStorage
+				localStorage.setItem(
+					"userProfile",
+					JSON.stringify({
+						id: responsePayload.sub,
+						name: responsePayload.name,
+						email: responsePayload.email,
+						picture: responsePayload.picture,
+					})
+				);
 
-        // Check if user is already logged in
-        window.onload = function() {
-            if (localStorage.getItem('userProfile')) {
-                window.location.href = 'index.html';
-            }
-        }
-    </script>
-</body>
-</html> 
+				// Redirect to the main app
+				window.location.href = "index.html";
+			}
+
+			function decodeJwtResponse(token) {
+				const base64Url = token.split(".")[1];
+				const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+				const jsonPayload = decodeURIComponent(
+					atob(base64)
+						.split("")
+						.map(function (c) {
+							return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+						})
+						.join("")
+				);
+				return JSON.parse(jsonPayload);
+			}
+
+			// Check if user is already logged in
+			window.onload = function () {
+				if (localStorage.getItem("userProfile")) {
+					window.location.href = "index.html";
+				}
+			};
+		</script>
+	</body>
+</html>
