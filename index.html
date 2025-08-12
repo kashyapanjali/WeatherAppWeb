@@ -23,84 +23,66 @@
 			defer></script>
 	</head>
 	<body>
-		<div class="weather-app">
-			<!-- Header -->
-			<header class="app-header">
-				<div class="header-content">
-					<h1>AI Weather App</h1>
-					<div class="user-profile">
-						<img id="userAvatar" src="" alt="User Avatar" class="avatar" />
-						<span id="userName" class="user-name">Guest</span>
-						<button id="signOutBtn" class="sign-out-btn" onclick="handleSignOut()">Sign Out</button>
-					</div>
+		<div class="container">
+			<!-- Sidebar -->
+			<aside class="sidebar">
+				<!-- Add User Profile Section -->
+				<div class="user-profile">
+					<img
+						id="userAvatar"
+						src=""
+						alt="User Avatar" />
+					<span id="userName"></span>
+					<button
+						id="signOutBtn"
+						onclick="handleSignOut()">
+						Sign Out
+					</button>
 				</div>
-			</header>
 
-			<!-- Main Content -->
-			<main class="app-main">
-				<!-- Weather Search -->
-				<section class="weather-search">
-					<form id="weatherForm" class="search-form">
-						<div class="search-input">
-							<input
-								type="search"
-								id="search"
-								placeholder="Search by city name..."
-								class="search-bar" />
-							<button type="submit" class="search-btn">
-								<i class="fas fa-search"></i>
-							</button>
-						</div>
-					</form>
-				</section>
-
-				<!-- Weather Display -->
-				<section class="weather-display">
-					<div class="weather-card">
-						<div class="weather-icon">
-							<img src="/weather.png" alt="Weather Icon" />
-						</div>
-						<div class="weather-info">
-							<h2 id="temperature">--°C</h2>
-							<h3 id="condition">Loading...</h3>
-							<div class="weather-details">
-								<p><span class="detail-label">Humidity:</span> <span id="humidity">--</span>%</p>
-								<p><span class="detail-label">Wind Speed:</span> <span id="wind">--</span> m/s</p>
-								<p><span class="detail-label">Pressure:</span> <span id="pressure">--</span> hPa</p>
-							</div>
-						</div>
-					</div>
-				</section>
-
-				<!-- Recommendations -->
-				<section class="recommendations">
-					<div class="recommendations-container">
-						<h2>Weather Recommendations</h2>
-						<div id="recommendations" class="recommendations-list"></div>
-					</div>
-				</section>
-			</main>
-
-			<!-- Feedback Sidebar -->
-			<aside class="feedback-sidebar">
-				<div class="feedback-container">
-					<h2>Share Your Feedback</h2>
-					<form id="feedbackForm" class="feedback-form">
-						<textarea
-							id="feedback"
-							placeholder="Share your thoughts about the weather app..."
-							rows="4"></textarea>
-						<button type="submit" class="submit-feedback">Submit</button>
-					</form>
-					<div class="feedback-display">
-						<h3>Recent Feedback</h3>
-						<div id="feedbackList" class="feedback-list"></div>
-					</div>
+				<h2>Feedback</h2>
+				<form id="feedbackForm">
+					<textarea
+						id="feedback"
+						placeholder="Share your thoughts..."
+						rows="5"></textarea>
+					<button type="submit">Submit</button>
+				</form>
+				<div class="feedback-display">
+					<h3>Feedback Received:</h3>
+					<div
+						id="feedbackList"
+						class="feedback-list"></div>
 				</div>
 			</aside>
-		</div>
 
-		<!-- Scripts -->
+			<!-- Content -->
+			<main class="content">
+				<div class="search-container">
+					<form id="weatherForm">
+						<input
+							type="search"
+							id="search"
+							placeholder="Search by city name" />
+					</form>
+				</div>
+				<div
+					class="weather"
+					id="weather">
+					<div class="weather-icon">
+						<img
+							src="/weather.png"
+							alt="Weather Icon" />
+					</div>
+					<div class="weather-info">
+						<h3>32°C</h3>
+						<h4>Clear</h4>
+						<p>Humidity: 50%</p>
+						<p>Wind Speed: 5 m/s</p>
+					</div>
+				</div>
+			</main>
+		</div>
 		<script src="config.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
