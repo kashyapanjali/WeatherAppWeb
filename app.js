@@ -4,7 +4,14 @@ const GEMINI_API_KEY = config.GEMINI_API_KEY;
 
 const form = document.getElementById("weatherForm");
 const search = document.getElementById("search");
-const weather = document.getElementById("weather");
+const weatherCard = document.querySelector(".weather-card");
+const weatherInfo = document.querySelector(".weather-info");
+const temperature = document.getElementById("temperature");
+const condition = document.getElementById("condition");
+const humidity = document.getElementById("humidity");
+const wind = document.getElementById("wind");
+const pressure = document.getElementById("pressure");
+const recommendations = document.getElementById("recommendations");
 
 const feedbackForm = document.getElementById("feedbackForm");
 const feedbackList = document.getElementById("feedbackList");
@@ -40,7 +47,6 @@ function handleSignOut() {
 
 // Fetch Weather
 const getWeather = async (city) => {
-  weather.innerHTML = `<h2>Loading...</h2>`;
   try {
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${WEATHER_API_KEY}&units=metric`;
     const response = await fetch(url);
@@ -48,63 +54,32 @@ const getWeather = async (city) => {
     const data = await response.json();
     showWeather(data);
   } catch (error) {
-    weather.innerHTML = `<h2>Error: ${error.message}</h2>`;
+    weatherInfo.innerHTML = `<h2>Error: ${error.message}</h2>`;
   }
 };
 
 // Update the showWeather function to include recommendations
 const showWeather = async (data) => {
-  const { temp, humidity } = data.main;
+  const { temp, humidity, pressure } = data.main;
   const { speed } = data.wind;
   const weatherIcon = data.weather[0].icon;
   const weatherDesc = data.weather[0].description;
 
-  weather.innerHTML = `
-    <div class="weather-display">
-      <div class="current-weather">
-        <div class="weather-icon">
-          <img src="https://openweathermap.org/img/wn/${weatherIcon}@2x.png" alt="${weatherDesc}" />
-        </div>
-        <div class="weather-info">
-          <h2>${data.name}</h2>
-          <h3 class="temperature">${temp}°C</h3>
-          <h4 class="weather-main">${data.weather[0].main}</h4>
-          <div class="weather-details">
-            <p><i class="fas fa-tint"></i> Humidity: ${humidity}%</p>
-            <p><i class="fas fa-wind"></i> Wind Speed: ${speed} m/s</p>
-          </div>
-        </div>
-      </div>
+  // Update weather info
+  temperature.textContent = `${temp}°C`;
+  condition.textContent = weatherDesc;
+  humidity.textContent = humidity;
+  wind.textContent = speed;
+  pressure.textContent = pressure;
 
-      <div class="recommendations-container">
-        <h2>Weather Recommendations</h2>
-        
-        <div class="recommendation-section clothing">
-          <h3><i class="fas fa-tshirt"></i> Clothing</h3>
-          <ul>
-            <li>${getClothingRecommendation(temp, weatherDesc)}</li>
-            <li>${getAccessoryRecommendation(weatherDesc)}</li>
-          </ul>
-        </div>
+  // Update weather icon
+  const weatherIconElement = document.querySelector(".weather-icon img");
+  weatherIconElement.src = `https://openweathermap.org/img/wn/${weatherIcon}@2x.png`;
+  weatherIconElement.alt = weatherDesc;
 
-        <div class="recommendation-section activities">
-          <h3><i class="fas fa-running"></i> Activities</h3>
-          <ul>
-            <li>${getActivityRecommendation(temp, weatherDesc, speed)}</li>
-            <li>Stay hydrated throughout the day</li>
-          </ul>
-        </div>
-
-        <div class="recommendation-section health">
-          <h3><i class="fas fa-heartbeat"></i> Health & Safety</h3>
-          <ul>
-            <li>${getHealthRecommendation(weatherDesc, humidity)}</li>
-            <li>${getAirQualityRecommendation(weatherDesc)}</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  `;
+  // Generate and display recommendations
+  const recommendationsHtml = await getWeatherRecommendations(data);
+  recommendations.innerHTML = recommendationsHtml;
 };
 
 // Helper functions for specific recommendations
