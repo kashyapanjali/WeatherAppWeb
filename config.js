@@ -17,4 +17,5 @@ const config = {
     appId: "1:899877398474:web:a46e671572bcc3be001133",
     measurementId: "G-12MV40EKWP"
   }
-}; 
+};
+
